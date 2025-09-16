@@ -125,34 +125,34 @@ cd ..
 
 ![Permisos de archivos](../imagenes/file-permissions.jpg)  
 
-### Salida estandar
+## Salida estandar
 
 La salida estandar (_Standar output_ o _stdout_) se refiere al _flujo estandarizado_ de datos que produce un programa de linea de comandos. Este flujo de datos, el cual es texto plano, facilita la exportación a diferentes dispositivos como impresoras, monitores o bien otros programas. 
 
 
-## Redirección de la salida estandar
+### Redirección de la salida estandar
 
->: Redirige la salida a un archivo (sobrescribe)
+"\>": Redirige la salida a un archivo (sobrescribe)
 
 ```
 echo "Hola mundo" > archivo.txt
 ```
 
->>: Redirige la salida a un archivo, pero agrega al final
+"\>\>": Redirige la salida a un archivo, pero agrega al final
 
 ```
 echo "Otra línea" >> archivo.txt
 ```
 
-<: Usa un archivo como entrada de un comando
+"<": Usa un archivo como entrada de un comando
 
 ```
 sort < archivo.txt
 ```
 
-## Pipes
+### Pipes
 
-Para redirigir la salida de un programa a otro se usa **|**  ( **pipe** o tubería ). Este es un método para encadenar programas de tal modo que la salida de uno es la entrada del que sigue. Se usa una barra vertical para separar los programas a usar.
+Para redirigir la salida de un programa a otro se usa "**|**"  ( **pipe** o tubería ). Este es un método para encadenar programas de tal modo que la salida de uno es la entrada del que sigue. Se usa una barra vertical para separar los programas a usar.
 
 
 ```
@@ -171,10 +171,10 @@ ls -l | grep "carpeta"
 | cp      | Copia archivos o directorios.                                 | ```cp archivo.txt copia_archivo.txt``` |
 | mv      | Mueve o renombra archivos o directorios.                      | ```mv archivo.txt nueva_ubicacion/```  |
 | cat     | Concatena y muestra el contenido de archivos.                 | ```cat archivo.txt```                  |
-| echo    | Muestra una línea de texto o variables.                       | ```echo "Hola, mundo!```               |
+| echo    | Muestra una línea de texto o variables.                       | ```echo "Hola, mundo!"```               |
 | chmod   | Cambia los permisos de archivos o directorios.                | ```chmod 755 script.sh```              |
 | grep    | Busca patrones en archivos utilizando expresiones regulares.  | ```grep "cadena" archivo.txt```        |
-| find    | Busca archivos y directorios bajo un directorio.              | ```find /home/user -name "*.txt@```    |
+| find    | Busca archivos y directorios bajo un directorio.              | ```find /home/user -name "*.txt@"```    |
 | head    | Muestra las primeras líneas de un archivo.                    | ```head -n 10 archivo.txt```           |
 | tail    | Muestra las últimas líneas de un archivo.                     | ```tail -n 10 archivo.txt```           |
 | wc      | Cuenta líneas, palabras y caracteres en archivos.             | ```wc -l archivo.txt```                |
@@ -242,6 +242,7 @@ https://drive.google.com/drive/folders/1MakE3A3VHXSmpw3fz66LveVMYWHxhBjW?usp=sha
 
 Colocar en la carpeta creada
 
+### Recorte de bases con baja calidad 
 
 ```
 cd datos_clase
