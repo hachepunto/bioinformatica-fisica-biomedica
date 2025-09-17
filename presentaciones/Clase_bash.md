@@ -57,23 +57,23 @@ máquina:~ usuario$
     Comando: mkdir
     Qué hace: Crea directorios (Make Directory).
     mkdir mi_carpeta
-    mkdir -p carpeta/padre/hija
+    mkdir -p mi_carpeta/padre/hija
     * -p: crea toda la estructura de directorios si no existe.
 
     Comando: cp
     Qué hace: Copia archivos o carpetas.
-    cp mi_archivo.txt copia_archivo.txt
+    cp mi_archivo.txt archivo.txt
     cp -r mi_carpeta mi_carpeta_backup
     * -r: copia recursiva para carpetas.
 
     Comando: mv
     Qué hace: Mueve o renombra archivos y carpetas (Move).
-    mv mi_archivo.txt otra_carpeta/
-    mv archivo_viejo.txt archivo_nuevo.txt
+    mv mi_archivo.txt mi_carpeta/
+    mv mi_carpeta/mi_archivo.txt mi_carpeta/archivo_nuevo.txt
 
     Comando: rm
     Qué hace: Elimina archivos o carpetas.
-    rm mi_archivo.txt
+    rm mi_carpeta/archivo_nuevo.txt
     rm -r mi_carpeta
 
     Comando: man
@@ -135,13 +135,13 @@ La salida estandar (_Standar output_ o _stdout_) se refiere al _flujo estandariz
 "\>": Redirige la salida a un archivo (sobrescribe)
 
 ```
-echo "Hola mundo" > archivo.txt
+echo "Un texto" > archivo.txt
 ```
 
 "\>\>": Redirige la salida a un archivo, pero agrega al final
 
 ```
-echo "Otra línea" >> archivo.txt
+echo "Otro texto" >> archivo.txt
 ```
 
 "<": Usa un archivo como entrada de un comando
@@ -286,4 +286,5 @@ kallisto quant -i ref/Homo_sapiens.GRCh38.idx -o kallisto_quants/SRR10212259 tri
 
 kallisto quant -i ref/Homo_sapiens.GRCh38.idx -o kallisto_quants/SRR10212258 trimming/sub_SRR10212258_R1.trimmed.fq.gz trimming/sub_SRR10212258_R2.trimmed.fq.gz 2> kallisto_quants/SRR10212258/sub_SRR10212258_kallisto.log
 ```
+
 
