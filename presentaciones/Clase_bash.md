@@ -35,25 +35,21 @@ máquina:~ usuario$
 >>>
 ```
 
-## Navegación de Directorios
+# Comandos básicos en UNIX
 
-    Comando: pwd
-    Qué hace: Muestra la ruta del directorio actual (Print Working Directory).
-    Salida esperada: algo como /home/tu_usuario.
+Escribe uno por uno los siguientes comandos mientras explico:
 
-    Comando: ls
-    Qué hace: Lista los archivos y carpetas del directorio.
+***ls*** (list) es un programa para listar el contenido de la carpeta en la que estamos "parados".
 
-    ls -l: muestra detalles como permisos y dueño.
-    ls -a: muestra archivos ocultos.
+Comando para ver el contenido de la carpeta donde estamos:
 
-    Comando: cd
-    Qué hace: Cambia de directorio (Change Directory).
+```
+ls
+```
 
-    Comando: touch
-    Qué hace: Crea un archivo vacío o actualiza la fecha de modificación.
-    Ejemplo: touch mi_archivo.txt
+Con estas opciones estamos cambiando el comportamiento de ls. En este caso usamos dos opciones "l" y "a". "l" cambia el formato de salida por el de "lista" y "a" indica que queremos ver todos (*all*) los archivos, tanto los visibles como los ocultos.
 
+<<<<<<< HEAD
     Comando: mkdir
     Qué hace: Crea directorios (Make Directory).
     mkdir mi_carpeta
@@ -75,11 +71,154 @@ máquina:~ usuario$
     Qué hace: Elimina archivos o carpetas.
     rm mi_carpeta/archivo_nuevo.txt
     rm -r mi_carpeta
+=======
+En los sistemas UNIX, los archivos cuyo nombre comienzan con un punto ".", son invisibles por defecto.
 
-    Comando: man
-    Qué hace: Muestra el manual del comando seleccionado.
-    man ls
-    man mkdir
+```
+ls -la
+```
+
+***cd*** (change directory) es un programa para cambiar de directorio dentro del árbol de directorios del sistema.
+
+```
+cd
+```
+>>>>>>> 90dc8bb (update class)
+
+***pwd*** (print working directory) es un pequeño programa que imprime en pantalla la ruta hacia el directorio donde estamos trabajando.
+
+```
+pwd
+```
+***mkdir*** (make directory) crea carpetas.
+
+Cambiamos a nuestro home con *cd* y luego creamos la carpeta *mi_carpeta*:
+
+```
+cd
+mkdir mi_carpeta
+```
+
+Nos cambiamos de lugar a *mi_carpeta*:
+
+```
+cd mi_carpeta
+```
+
+vemos el contenido de la carpeta recien creada:
+
+```
+ls
+```
+
+
+### Descarga de archivos de la web
+
+***wget*** (www get) Es un programa para descargar archivos de internet.
+
+Ejecutamos el comando con una dirección URL del archivo que queremos descargar: 
+
+```
+wget "https://raw.githubusercontent.com/hachepunto/bioinformatica-fisica-biomedica/master/data/Characters.tsv"
+```
+
+### Visualizar el archivo
+
+***less*** es un paginador para ver archivos.
+
+Vamos a visualizar uno de nuestro archivo descargado:
+
+```
+less Characters.tsv
+```
+
+salir con q
+
+***more*** Paginador de archivos de texto plano. Este programa imprime en pantalla el contenido de archivos de texto.
+
+```
+more Characters.tsv
+```
+
+***touch*** Crea un archivo vacío o actualiza la fecha de modificación.
+
+
+```
+touch archivo.txt
+```
+
+***mv*** (move) comando que sirve para mover o renombrar y archivo o carpeta.
+
+
+*Renombrar*
+
+Para renombrar tenemos que darle a *mv* de argumento, primero el archivo tal cual está seguido de como queremos que se llame: 
+
+```
+mv archivo.txt mi_archivo.txt
+```
+
+
+
+*Mover*
+
+Vamos a hacer una carpeta nueva para probar mover archivos con el comando *mv*:
+
+```
+mkdir carpeta_nueva
+```
+
+Ahora lo que tenemos que hacer es darle de argumento a *mv*, primero la ruta al archivo que queremos mover, y luego una ruta a una **carpeta** (no a un archivo) a donde queramos moverlo. 
+
+```
+mv mi_archivo.txt carpeta_nueva/
+```
+
+***cp*** (copiar) Comando que sirve para copiar archivos o carpetas
+
+Si queremos generar una copia idéntica de un archivo usamos este comando de forma muy similar a como movemos archivos con *mv*. Le damos como argumento a *cp* primero el archivo que queremos copiar y luego la ruta a donde queremos que esté la copia nueva: 
+
+
+```
+cp carpeta_nueva/mi_archivo.txt carpeta_nueva/copia_archivo.txt
+cp -r carpeta_nueva carpeta_nueva_backup
+```
+
+* -r: copia recursiva para carpetas.
+
+***rm*** (remove) Es el comando que sirve para eliminar archivos o carpetas. No pregunta si sí deseas borrar, hace lo que le indicas.
+
+*Borrar archivos*
+
+Le damos la ruta al o los archivos que queremos borrar:
+
+```
+rm carpeta_nueva/copia_archivo.txt
+```
+
+*Borrar carpetas*
+
+¿Qué pasa si intentamos esto?
+
+```
+rm carpeta_nueva/
+```
+
+**rm: carpeta_nueva/: is a directory**
+
+Resulta que, por seguridad. rm no puede borrar carpetas sin que se lo especifiques. Esto se hace usando la opción "-r" (recursivamente) con la cual hay más seguridad que estás ejecutando el comando con tu deseo explícito.
+
+```
+rm -r carpeta_nueva/
+```
+* -r: borrado recursivo para carpetas.
+
+***man*** Muestra el manual del comando seleccionado.
+
+```
+man ls
+man mkdir
+```
 
 ### Estructura de archivos
 
@@ -123,7 +262,15 @@ cd ..
 
   - Permisos de archivos
 
-![Permisos de archivos](../imagenes/file-permissions.jpg)  
+![Permisos de archivos](../imagenes/file-permissions.jpg)
+
+Deacargen los archivos de:
+
+https://drive.google.com/drive/folders/1MakE3A3VHXSmpw3fz66LveVMYWHxhBjW?usp=sharing
+
+Colocar en la carpeta creada "mi_carpeta"
+
+
 
 ## Salida estandar
 
@@ -179,23 +326,7 @@ ls -l | grep "carpeta"
 | tail    | Muestra las últimas líneas de un archivo.                     | ```tail -n 10 archivo.txt```           |
 | wc      | Cuenta líneas, palabras y caracteres en archivos.             | ```wc -l archivo.txt```                |
 
-### Descarga de archivo de la web
 
-```
-wget "https://raw.githubusercontent.com/hachepunto/bioinformatica-fisica-biomedica/master/data/Characters.tsv"
-```
-
-### Visualizar el archivo
-
-```
-less Characters.tsv
-```
-
-salir con q
-
-```
-more Characters.tsv
-```
 
 #### Buscar todos los personajes de la casa Griffindor 
 
@@ -209,13 +340,21 @@ grep Gryffindor Characters.tsv
 grep dor Characters.tsv
 ```
 
-opciones comunes c, e, F, i, m y v
+opciones comunes:
+
+- `-c` → **Contar**: Muestra solo el número de coincidencias por archivo
+- `-e` → **Patrón**: Permite especificar múltiples patrones de búsqueda
+- `-F` → **Fijo**: Busca texto literal (sin expresiones regulares)
+- `-i` → **Insensible**: Ignora mayúsculas/minúsculas en la búsqueda
+- `-m` → **Límite**: Detiene la búsqueda después de N coincidencias
+- `-v` → **Invertir**: Muestra las líneas que NO coinciden con el patrón
 
 #### Filtrado de condiciones especificas
 
 ```
 grep "Gryffindor" Characters.tsv | grep -F "Pure-blood" | grep -i "black"
 ```
+
 
 ## Preprocesamiento de datos de secuenciación
 
@@ -230,17 +369,10 @@ mkdir fastqc
 fastqc -o fastqc/ control_18S_2019_minq7.fastq
 ```
 
-### Recorte de adaptadores y lecturas de mala calidad
+## Recorte de adaptadores y lecturas de mala calidad
 
-```
-mkdir datos_clase
-```
 
-Deacargen los archivos fastq de:
 
-https://drive.google.com/drive/folders/1MakE3A3VHXSmpw3fz66LveVMYWHxhBjW?usp=sharing
-
-Colocar en la carpeta creada
 
 ### Recorte de bases con baja calidad 
 
