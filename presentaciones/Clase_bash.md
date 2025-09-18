@@ -49,29 +49,6 @@ ls
 
 Con estas opciones estamos cambiando el comportamiento de ls. En este caso usamos dos opciones "l" y "a". "l" cambia el formato de salida por el de "lista" y "a" indica que queremos ver todos (*all*) los archivos, tanto los visibles como los ocultos.
 
-<<<<<<< HEAD
-    Comando: mkdir
-    Qué hace: Crea directorios (Make Directory).
-    mkdir mi_carpeta
-    mkdir -p mi_carpeta/padre/hija
-    * -p: crea toda la estructura de directorios si no existe.
-
-    Comando: cp
-    Qué hace: Copia archivos o carpetas.
-    cp mi_archivo.txt archivo.txt
-    cp -r mi_carpeta mi_carpeta_backup
-    * -r: copia recursiva para carpetas.
-
-    Comando: mv
-    Qué hace: Mueve o renombra archivos y carpetas (Move).
-    mv mi_archivo.txt mi_carpeta/
-    mv mi_carpeta/mi_archivo.txt mi_carpeta/archivo_nuevo.txt
-
-    Comando: rm
-    Qué hace: Elimina archivos o carpetas.
-    rm mi_carpeta/archivo_nuevo.txt
-    rm -r mi_carpeta
-=======
 En los sistemas UNIX, los archivos cuyo nombre comienzan con un punto ".", son invisibles por defecto.
 
 ```
@@ -83,7 +60,6 @@ ls -la
 ```
 cd
 ```
->>>>>>> 90dc8bb (update class)
 
 ***pwd*** (print working directory) es un pequeño programa que imprime en pantalla la ruta hacia el directorio donde estamos trabajando.
 
