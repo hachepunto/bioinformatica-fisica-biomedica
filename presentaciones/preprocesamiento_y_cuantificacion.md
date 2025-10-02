@@ -1,4 +1,4 @@
-## Preprocesamiento de datos de secuenciación
+# Preprocesamiento de datos de secuenciación
 
 ### Análisis con fastqc
 
@@ -18,7 +18,7 @@ mkdir trimming
 fastp --in1 sub_SRR10212258_R1.fastq.gz --in2 sub_SRR10212258_R2.fastq.gz --out1 trimming/sub_SRR10212258_R1.trimmed.fq.gz --out2 trimming/sub_SRR10212258_R2.trimmed.fq.gz -g 10 -q 20 -l 50 --html trimming/SRR10212258_fastp.html --json trimming/SRR10212258_fastp.json
 ```
 
-# Kallisto
+## Kallisto
 
 Es un programa para la cuantificación de datos de bulk o single-cell RNA-seq
 
@@ -40,7 +40,7 @@ https://drive.google.com/drive/folders/1MakE3A3VHXSmpw3fz66LveVMYWHxhBjW?usp=sha
 
 Colocar en la carpeta creada "mi_carpeta"
 
-## Ejercicio:
+### Ejercicio:
 
 Ahora si probemos kallisto en una muestra.
 Para este ejercicio vamos a utlilizar datos de la liga de arriba que ya están descargados en data_kallisto y un índice que ya tenemos preparado en refs_kallisto.
