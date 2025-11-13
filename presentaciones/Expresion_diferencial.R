@@ -147,6 +147,8 @@ lfc_u_h
 
 log2(mu/mh)
 
+## --- HEATMAP ---
+
 degs<-subset(res, (!is.na(res$padj) & 
                      res$pvalue<0.05 & 
                      baseMean>=50 & res$padj < 0.05 & 
@@ -159,6 +161,9 @@ degs.names <- merge(myNewIds,df,by.x='gene',by.y=0)
 dim(degs.names)
 head(degs.names,n=2)
 write.table(degs.names,"degs.tsv",sep="\t",row.names = F)
+write.table(degs.names$gene_name, "degs_symbols.tsv", sep = "\t", row.names = F, col.names = F)
+
+
 library(pheatmap)
 top <- degs[order(degs$padj),]
 myTpm <- subset(table.out, 
@@ -180,3 +185,83 @@ log2mat <- log2(mat)
 my_hmap <- pheatmap(log2mat,
                     cluster_rows = F,
                     main="DEGs UHR vs HBR")
+
+
+library(pheatmap)
+
+# Selecciona los 50 genes más significativos
+top_genes <- head(order(res$padj), 50)
+mat <- assay(varianceStabilizingTransformation(dds))[top_genes, ]
+
+pheatmap(mat,
+         cluster_rows = TRUE,
+         cluster_cols = TRUE,
+         annotation_col = coldata,
+         show_rownames = TRUE,
+         fontsize = 10,
+         color = colorRampPalette(c("navy", "white", "firebrick3"))(50))
+
+
+## --- VOLCANO PLOT 1 ---
+
+# Paquetes necesarios
+library(ggplot2)
+library(dplyr)
+
+# Convertimos a data frame y preparamos datos
+res_df <- as.data.frame(res) %>%
+  mutate(
+    gene = rownames(res),
+    neg_log10_padj = -log10(padj),
+    regulation = case_when(
+      log2FoldChange >= 1 & padj < 0.05 ~ "Up",
+      log2FoldChange <= -1 & padj < 0.05 ~ "Down",
+      TRUE ~ "NS"
+    )
+  )
+
+# Volcano plot
+ggplot(res_df, aes(x = log2FoldChange, y = neg_log10_padj, color = regulation)) +
+  geom_point(alpha = 0.7, size = 1.5) +
+  scale_color_manual(values = c("Up" = "firebrick", "Down" = "steelblue", "NS" = "gray70")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano plot",
+    x = "log2 Fold Change",
+    y = "-log10 adjusted p-value",
+    color = "Regulation"
+  ) +
+  theme_bw(base_size = 14)
+
+## --- VOLCANO PLOT 2 ---
+
+# Instala si no lo tienes
+# BiocManager::install("EnhancedVolcano")
+
+library(EnhancedVolcano)
+
+EnhancedVolcano(res,
+                lab = rownames(res),
+                x = "log2FoldChange",
+                y = "padj",
+                title = "Volcano plot - DESeq2 results",
+                subtitle = NULL,
+                xlab = bquote(~Log[2]~ "fold change"),
+                ylab = bquote(~-Log[10]~ "adjusted p-value"),
+                pCutoff = 0.05,
+                FCcutoff = 1.0,
+                pointSize = 2.0,
+                labSize = 3.0,
+                col = c("gray70", "steelblue3", "firebrick3", "firebrick"),
+                colAlpha = 0.8,
+                legendPosition = "right",
+                legendLabSize = 12,
+                legendIconSize = 4.0,
+                drawConnectors = TRUE,
+                widthConnectors = 0.5,
+                gridlines.major = FALSE,
+                gridlines.minor = FALSE
+)
+
+
